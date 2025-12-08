@@ -11,6 +11,25 @@ jobs:
     runs-on: ubuntu-latest 
 
     steps:
-      - name: Testing
-        run: nabiha "Hello World :)"
+      - name: Checkout code 
+        uses: actions/checkout@v6.0.1
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@2.36.0
+        with:
+          php-version: "8.2"
+
+      - name: Install Composer
+        run: composer install --no-interaction --no-progress --optimize-autoloader
+
+      - name: Prepare Laravel 
+        run: |
+            cp env.example .env
+            php artisan key:generate
+        
+      - name: Run Tests
+        run: php artisan test
+
+      
+        
     
