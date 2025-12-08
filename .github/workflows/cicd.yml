@@ -24,6 +24,7 @@ jobs:
 
       - name: Prepare Laravel 
         run: |
+            composer -v
             cp .env.example .env
             php artisan key:generate
             php artisan jwt:secret
